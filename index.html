@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <link href="advicegeneratorstyling.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet">
+  
+  <title>Frontend Mentor | Advice generator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+ <main>
+
+  <h1>Advice #<span id="adviceid"><!-- Advice ID goes here --></span></h1>
+
+  <h2 id="adviceparagraph"></h2>
+
+  <picture>
+    <source media="min-width:375px" srcset="images/pattern-divider-desktop.svg">
+    <img src="images/pattern-divider-mobile.svg" alt="dividerbetweendiceandtext">
+  </picture>
+<button id="diceiconbutton">
+  <img src="images/icon-dice.svg" alt="diceicon" class="diceicon">
+</button>
+ </main>
+   
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a> 
+    Coded by <a href="#">Papa Ankomah</a>.
+  </div>
+
+  <script>
+    const diceButton = document.getElementById("diceiconbutton")
+    diceButton.addEventListener("click",showAdvice)
+
+    function showAdvice(){
+      fetch("https://api.adviceslip.com/advice")
+      .then(response => response.json())
+      .then(data => {
+      document.getElementById("adviceid").textContent = data.slip.id
+      document.getElementById("adviceparagraph").textContent = data.slip.advice
+    })
+    }
+
+  </script>
+</body>
+</html>
